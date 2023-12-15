@@ -15,12 +15,14 @@ class Car {
     this.angle = 0;
 
     // Create a new Controls object for handling user input
+    this.sensor = new Sensor(this);
     this.controls = new Controls();
   }
 
   // Method to update car's state on each frame
-  update() {
+  update(roadBorders) {
    this.#move();
+   this.sensor.update(roadBorders);
   }
 
   #move() {
@@ -98,5 +100,7 @@ class Car {
 
     // Restore the context to its original state
     ctx.restore();
+
+    this.sensor.draw(ctx);
   }
 }
